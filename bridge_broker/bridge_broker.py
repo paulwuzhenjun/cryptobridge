@@ -1,12 +1,8 @@
-#!/usr/bin/env python3                                                                               
-# -*- coding: utf-8 -*-                                                                              
-# @author: zig(zig@uranome.com)
-
 import tornado.ioloop
 import tornado.web
 
-from bridge_broker.TEBridge import TEBridge
-from bridge_broker.CEBridge import CEBridge
+from bridge_broker.te_bridge import TEBridge
+from bridge_broker.ce_bridge import CEBridge
 
 
 class BridgeBroker:

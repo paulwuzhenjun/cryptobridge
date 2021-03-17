@@ -3,9 +3,11 @@
 # @author: zig(zig@uranome.com)
 
 import json
-import tornado.websocket
+import jsmin
 
 
-class CEBridge(tornado.websocket.WebSocketHandler):
-    async def on_message(self, message):
-        message_json = json.loads(message)
+def conf_json_load_from_path(path):
+    file = open(path, 'r')
+    content = file.read()
+    content_minified = jsmin.jsmin(content)
+    return json.loads(content_minified)
