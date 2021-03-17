@@ -30,5 +30,6 @@ class InexTransfer:
     def transfer(self):
         mongo_clt = mongo_load_from_uri(self.mongo_uri)
         secret: AccountSecret = conj_secret_load(mongo_clt, self.secret_id)
+        secret.field = ExchangeField.SPOT
         account_mgr = ExchangeFactory.create_account_mgr(secret)
         asyncio.run(account_mgr.transfer_asset(self.currency, self.amount, self.from_field, self.from_pair, self.to_field, self.to_pair))

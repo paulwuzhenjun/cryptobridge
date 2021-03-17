@@ -7,6 +7,9 @@ class TEBridge(tornado.websocket.WebSocketHandler):
         self.te_id = None
         self.broker = broker
 
+    async def open(self):
+        await self.write_message({'method': 'POST', 'path': '/protocol/version', 'params': [0, 0]})
+
     async def on_message(self, message):
         message_json = json.loads(message)
         method, path, params = message_json['method'], message_json['path'], message_json['params']

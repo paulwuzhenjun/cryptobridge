@@ -1,10 +1,7 @@
-certifi==2020.12.5
 click==7.1.2
 jsmin==2.2.2
 pymongo==3.11.3
-python-dateutil==2.8.1
 simplejson==3.17.2
-six==1.15.0
 tornado==6.1
-urllib3==1.26.4
-git+https://github.com/gateio/gateapi-python.git
+git+https://github.com/coinrising/python-binance.git@0.7.10
+git+https://github.com/gateio/gateapi-python.git@4.19.4
