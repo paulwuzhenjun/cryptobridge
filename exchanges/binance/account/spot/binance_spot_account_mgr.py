@@ -24,7 +24,8 @@ class BinanceSpotAccountMgr(AccountManager):
 
         self.logger.info(f'kwargs: {kwargs}')
 
-        await asyncio.get_event_loop().run_in_executor(None, functools.partial(self.rest_clt.universal_transfer, **kwargs))
+        response = await asyncio.get_event_loop().run_in_executor(None, functools.partial(self.rest_clt.universal_transfer, **kwargs))
+        self.logger.info(f'response: {response}')
 
     def __std_field_to_ex_text__(self, field, settlement):
         if field == ExchangeField.SPOT:

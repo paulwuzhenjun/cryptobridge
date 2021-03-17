@@ -39,4 +39,5 @@ class GateSpotAccountMgr(AccountManager):
 
         wallet_rest = gate_api.WalletApi(gate_api.ApiClient(configuration=self.conf))
         transfer = gate_api.Transfer(**kwargs)
-        await asyncio.get_event_loop().run_in_executor(None, wallet_rest.transfer, transfer)
+        response = await asyncio.get_event_loop().run_in_executor(None, wallet_rest.transfer, transfer)
+        self.logger.info(f'response: {response}')
