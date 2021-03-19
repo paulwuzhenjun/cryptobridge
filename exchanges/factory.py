@@ -2,6 +2,7 @@ from market.account import *
 from market.exchange import *
 from exchanges.binance import *
 from exchanges.gate import *
+from exchanges.hbg import *
 
 
 class ExchangeFactory:
@@ -11,6 +12,9 @@ class ExchangeFactory:
         },
         ExchangeBrand.GATE: {
             ExchangeField.SPOT: GateSpotAccountMgr
+        },
+        ExchangeBrand.HBG: {
+            ExchangeField.SPOT: HBGSpotAccountMgr
         }
     }
 

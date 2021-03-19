@@ -10,4 +10,6 @@ def conj_secret_load(mongo_client, secret_id):
     database = mongo_client['Secrets']
     coll = database[client]
     secret = coll.find_one({'_id': secret_id})
+    if secret is None:
+        raise ValueError(f'secret({secret_id}) not found')
     return AccountSecret.load_from_dict(secret)

@@ -7,13 +7,13 @@ from bridge_broker.ce_bridge import CEBridge
 
 
 class BridgeBroker:
-    def __init__(self, sentry_mongo_uri, port):
+    def __init__(self, port):
         self.te_channels = {}
 
         self.app = tornado.web.Application([
             (r'/bridge/te', TEBridge, {'broker': self}),
             (r'/bridge/ce', CEBridge, {'broker': self}),
-        ])
+        ], websocket_ping_interval=30)
         self.app.listen(port)
 
         self.logger = logging.getLogger('bridge-broker')

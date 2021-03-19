@@ -1,14 +1,15 @@
 import json
+from typing import Any
 import tornado.websocket
 
 
 class TEBridge(tornado.websocket.WebSocketHandler):
-    async def initialize(self, broker):
+    te_id: [str]
+    broker: Any
+
+    def initialize(self, broker):
         self.te_id = None
         self.broker = broker
-
-    async def open(self):
-        await self.write_message({'method': 'POST', 'path': '/protocol/version', 'params': [0, 0]})
 
     async def on_message(self, message):
         message_json = json.loads(message)

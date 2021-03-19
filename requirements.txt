@@ -3,5 +3,10 @@ jsmin==2.2.2
 pymongo==3.11.3
 simplejson==3.17.2
 tornado==6.1
+broker-trade-client
+aiohttp[speedups]
+websockets
+ujson
 git+https://github.com/coinrising/python-binance.git@0.7.10
 git+https://github.com/gateio/gateapi-python.git@4.19.4
+git+https://github.com/HuobiRDCenter/huobi_Python.git@v2.3.0
