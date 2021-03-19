@@ -10,6 +10,8 @@ class HBGSpotAccountMgr(AccountManager):
     async def transfer_asset(self, currency, amount, from_field, from_pair, to_field, to_pair):
         if from_field == ExchangeField.SWAP or to_field == ExchangeField.SWAP:
             await self.__transfer_between_spot_swap(currency, amount, from_field, to_field)
+        else:
+            raise NotImplementedError()
 
     async def __transfer_between_spot_swap(self, currency, amount, from_field, to_field):
         uri = 'https://api.huobi.pro/v2/account/transfer'
