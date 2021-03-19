@@ -3,10 +3,10 @@
 # @author: zig(zig@uranome.com)
 
 from conj.mongo.secret import conj_secret_load
-from strategies.Cryptoforge.typo import *
+from strategies.typo import *
 
 
-def conj_strategy_load(mongo_client, strategy_id):
+async def conj_strategy_load(mongo_client, strategy_id):
     deploy_client = strategy_id.split('@')[0]
     deploy_database = mongo_client['Strategy_deploy']
     deploy_coll = deploy_database[deploy_client]
@@ -19,8 +19,10 @@ def conj_strategy_load(mongo_client, strategy_id):
         template_database = mongo_client['Strategy_template']
         template_coll = template_database[template_coll]
         template_doc = template_coll.find_one({'_id': template_id})
-    template_doc = {} if template_doc is None else template_doc
-    cryptoforge_strategy = CryptoforgeStrategy.load_from_dict(deploy_doc, template_doc)
-    cryptoforge_strategy.master_secret = conj_secret_load(mongo_client, cryptoforge_strategy.master_secret)
-    cryptoforge_strategy.slave_secret = conj_secret_load(mongo_client, cryptoforge_strategy.slave_secret)
-    return cryptoforge_strategy
+    final_doc = template_doc
+    final_doc.update(deploy_doc)
+
+    strategy_deploy_inst = StrategyDeploy.load_from_dict(final_doc)
+    strategy_deploy_inst.master_secret = conj_secret_load(mongo_client, strategy_deploy_inst.master_secret)
+    strategy_deploy_inst.slave_secret = conj_secret_load(mongo_client, strategy_deploy_inst.slave_secret)
+    return strategy_deploy_inst

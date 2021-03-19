@@ -1,10 +1,10 @@
 import json
-from typing import Any
+from typing import Any, Optional
 import tornado.websocket
 
 
 class TEBridge(tornado.websocket.WebSocketHandler):
-    te_id: [str]
+    te_id: Optional[str]
     broker: Any
 
     def initialize(self, broker):
@@ -13,12 +13,12 @@ class TEBridge(tornado.websocket.WebSocketHandler):
 
     async def on_message(self, message):
         message_json = json.loads(message)
-        method, path, params = message_json['method'], message_json['path'], message_json['params']
+        method, path, params = message_json['method'], message_json['path'], message_json.get('params', [])
         if method == 'POST':
             await self.on_post(path, params)
 
     async def on_post(self, path, params):
         if path == '/te/onboard':
-            # 策略层登记
+            # 交易层登记
             self.te_id = params[0]
             await self.broker.on_te_onboard(self.te_id, self)
