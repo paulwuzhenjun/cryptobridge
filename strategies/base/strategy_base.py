@@ -2,7 +2,7 @@ import abc
 import hmac
 import base64
 import hashlib
-from typing import Optional
+from typing import *
 import pymongo
 from core.datasource.mongo import *
 from conj.mongo.strategy import *
