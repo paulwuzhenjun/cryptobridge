@@ -38,3 +38,4 @@ class BinanceSpotAccountMgr(AccountManager):
             elif settlement == MarketCurrency.USD:
                 return 'CMFUTURE'
         raise NotImplementedError()
+    
